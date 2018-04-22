@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"fmt"
 	"os"
+	"io"
 )
 
 func main() {
@@ -13,7 +14,15 @@ func main() {
 		os.Exit(1)
 	}
 
-	bs := make([]byte, 99999)
+	//Utilizar la funcion Read que implementa el Reader Interface
+	//Que a su vez es implementado por el Response Body
+	//Para leer el Body Response
+	/*bs := make([]byte, 99999)
 	resp.Body.Read(bs)
-	fmt.Println(string(bs))
+	fmt.Println(string(bs))*/
+
+	//Reader "popula" un []byte
+	//Writer, toma ese []byte y lo pinta en terminal, hd o lo que sea
+
+	io.Copy(os.Stdout, resp.Body)
 }
